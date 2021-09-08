@@ -1,7 +1,7 @@
 function computerPlay() {
     
     // Contains the computer's move set
-    const moveSet = ['Rock', 'Paper', 'Scissors']
+    const moveSet = ['Rock', 'Paper', 'Scissors'];
     
     // Gets a random number between 0 inclusive and 9 inclusive (10 total integers)
     let index = Math.floor(Math.random()*10);
@@ -13,7 +13,31 @@ function computerPlay() {
     }
     
     // Uses the remainder of division by 3 to choose the computer's move
-    console.log(moveSet[index%3]);
+    return moveSet[index%3];
 }
 
-computerPlay();
+function playRound(playerSelection, computerSelection) {
+    
+    // Standardizes capitalization of player's move
+    let playerMove = playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1);
+    console.log(playerMove);
+    
+    if ((playerMove == 'Rock' && computerSelection == 'Paper') 
+    || (playerMove == 'Paper' && computerSelection == 'Scissors') 
+    || (playerMove == 'Scissors' && computerSelection == 'Rock')) {
+        return `You Lose! ${computerSelection} beats ${playerMove}`;
+    
+    } else if ((playerMove == 'Rock' && computerSelection == 'Scissors') 
+    || (playerMove == 'Paper' && computerSelection == 'Rock') 
+    || (playerMove == 'Scissors' && computerSelection == 'Paper')) {
+        return `You Win! ${playerMove} beats ${computerSelection}`;
+    
+    } else {
+        return `You tied this round!`;
+    }
+}
+
+const playerMove = 'rock';
+const computerMove = computerPlay();
+
+console.log(playRound(playerMove, computerMove));
